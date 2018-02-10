@@ -2,6 +2,8 @@ package com.example.spinnerdemo;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -9,7 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private TextView textView;
     private Spinner spinner;
@@ -37,5 +39,18 @@ public class MainActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // 4、Spinner加载
         spinner.setAdapter(adapter);
+        // 5、Spinner设置监听器
+        spinner.setOnItemSelectedListener(this);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String cityNAme = adapter.getItem(position);
+        //String cityNAme = list.get(position);
+        textView.setText("您选择的城市是" + cityNAme);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
     }
 }
